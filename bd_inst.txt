@@ -1,0 +1,5 @@
+CREATE TABLE circuitos (id integer, pista varchar(100), pais varchar(50), cidade varchar(100), extensao integer, voltas integer, record varchar(30));
+
+CREATE TABLE equipes (id integer, nome varchar(100), chefe varchar(100), sede varchar (100), ano integer, carro varchar(50), vitorias integer);
+
+CREATE TABLE pilotos (id integer, nome varchar(100), nacionalidade varchar(100), equipe varchar (100), numero integer, pontos integer);

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.21.3.final using JasperReports Library version 6.21.3-4a3078d20785ebe464f18037d738d12fc98c13cf  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorio_params_new" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="523259f4-09e0-4145-91a8-8f56967e4b4c">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DataAdapter.jrdax"/>
+	<parameter name="P1" class="java.lang.String"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT * FROM pilotos WHERE UPPER(nacionalidade) LIKE UPPER('%' || $P{P1} || '%');]]>
+	</queryString>
+	<field name="id" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="id"/>
+		<property name="com.jaspersoft.studio.field.label" value="id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="pilotos"/>
+	</field>
+	<field name="nome" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="nome"/>
+		<property name="com.jaspersoft.studio.field.label" value="nome"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="pilotos"/>
+	</field>
+	<field name="nacionalidade" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="nacionalidade"/>
+		<property name="com.jaspersoft.studio.field.label" value="nacionalidade"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="pilotos"/>
+	</field>
+	<field name="equipe" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="equipe"/>
+		<property name="com.jaspersoft.studio.field.label" value="equipe"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="pilotos"/>
+	</field>
+	<field name="numero" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="numero"/>
+		<property name="com.jaspersoft.studio.field.label" value="numero"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="pilotos"/>
+	</field>
+	<field name="pontos" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="pontos"/>
+		<property name="com.jaspersoft.studio.field.label" value="pontos"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="pilotos"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="57" splitType="Stretch">
+			<staticText>
+				<reportElement x="40" y="10" width="300" height="30" uuid="7ea242ee-877d-44ef-8351-3783a812267c"/>
+				<textElement>
+					<font size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PILOTOS POR NACIONALIDADE:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="340" y="10" width="190" height="30" uuid="40e45541-dacf-4046-843c-931c7ebaff2a"/>
+				<textElement>
+					<font size="18"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{P1}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="2" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="44" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="10" width="100" height="30" uuid="cae667a8-ff9d-4955-9323-1f56395342da"/>
+				<textElement>
+					<font size="12" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Numero]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="110" y="10" width="100" height="30" uuid="6a87b2e5-a841-4201-b1dc-352d91897fed"/>
+				<textElement>
+					<font size="12" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Nome]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="280" y="10" width="100" height="30" uuid="27f37441-55ee-4209-9c9b-973db2176f1c"/>
+				<textElement>
+					<font size="12" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Equipe]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="460" y="7" width="100" height="30" uuid="38a737c0-aa97-4355-9c3e-cc4122d2611b"/>
+				<textElement>
+					<font size="12" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Pontos]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="61" splitType="Stretch">
+			<textField>
+				<reportElement x="5" y="9" width="100" height="30" uuid="c936acfe-d224-4ea5-8150-b6779da52588"/>
+				<textFieldExpression><![CDATA[$F{numero}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="110" y="10" width="160" height="50" uuid="0b224370-2300-4783-9651-34635a88ad9e"/>
+				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="280" y="9" width="140" height="30" uuid="08e33dfe-c3ff-4097-af77-d86efbc4620d"/>
+				<textFieldExpression><![CDATA[$F{equipe}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="460" y="9" width="100" height="30" uuid="80945c05-9aa4-4c94-9397-9cee2697086c"/>
+				<textFieldExpression><![CDATA[$F{pontos}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

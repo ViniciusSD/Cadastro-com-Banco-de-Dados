@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.21.3.final using JasperReports Library version 6.21.3-4a3078d20785ebe464f18037d738d12fc98c13cf  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="vendas" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="30" rightMargin="30" topMargin="20" bottomMargin="20" uuid="1da4e001-9e6c-42e0-8b68-a217ba798bfc">
+	<property name="ireport.scriptlethandling" value="2"/>
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DataAdapter.jrdax"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<queryString>
+		<![CDATA[SELECT 
+    e.nome AS equipe,
+    p.nome AS piloto_nome,
+    p.numero AS piloto_numero,
+    p.pontos AS piloto_pontos,
+    total.total_pontos
+FROM 
+    pilotos p
+JOIN 
+    equipes e 
+ON 
+    LOWER(p.equipe) = LOWER(e.nome)
+JOIN (
+    SELECT 
+        LOWER(equipe) AS equipe_normalizada,
+        SUM(pontos) AS total_pontos
+    FROM 
+        pilotos
+    GROUP BY 
+        LOWER(equipe)
+) total 
+ON 
+    LOWER(e.nome) = total.equipe_normalizada
+ORDER BY 
+    e.nome, p.nome;]]>
+	</queryString>
+	<field name="equipe" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="equipe"/>
+		<property name="com.jaspersoft.studio.field.label" value="equipe"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="equipes"/>
+	</field>
+	<field name="piloto_nome" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="piloto_nome"/>
+		<property name="com.jaspersoft.studio.field.label" value="piloto_nome"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="pilotos"/>
+	</field>
+	<field name="piloto_numero" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="piloto_numero"/>
+		<property name="com.jaspersoft.studio.field.label" value="piloto_numero"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="pilotos"/>
+	</field>
+	<field name="piloto_pontos" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="piloto_pontos"/>
+		<property name="com.jaspersoft.studio.field.label" value="piloto_pontos"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="pilotos"/>
+	</field>
+	<field name="total_pontos" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="total_pontos"/>
+		<property name="com.jaspersoft.studio.field.label" value="total_pontos"/>
+	</field>
+	<variable name="total_regiao" class="java.lang.Integer" resetType="Group" resetGroup="equipe" calculation="Sum">
+		<variableExpression><![CDATA[$F{total_pontos}]]></variableExpression>
+		<initialValueExpression><![CDATA[new java.lang.Integer(0)]]></initialValueExpression>
+	</variable>
+	<group name="total">
+		<groupExpression><![CDATA[null]]></groupExpression>
+		<groupHeader>
+			<band splitType="Stretch"/>
+		</groupHeader>
+		<groupFooter>
+			<band height="29" splitType="Stretch">
+				<line>
+					<reportElement key="line" mode="Opaque" x="6" y="3" width="520" height="1" forecolor="#000000" backcolor="#FFFFFF" uuid="ba62b90e-4e64-4586-bc45-5fcb629d9a21"/>
+					<graphicElement fill="Solid">
+						<pen lineWidth="0.5" lineStyle="Solid"/>
+					</graphicElement>
+				</line>
+			</band>
+		</groupFooter>
+	</group>
+	<group name="equipe">
+		<groupExpression><![CDATA[$F{equipe}]]></groupExpression>
+		<groupHeader>
+			<band height="30" splitType="Stretch">
+				<textField pattern="" isBlankWhenNull="false">
+					<reportElement key="textField" mode="Opaque" x="5" y="5" width="523" height="23" forecolor="#FFFFFF" backcolor="#666666" uuid="4eba320a-c248-4607-9303-08b1c0d00446"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None">
+						<font size="14" isBold="true"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{equipe}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="28" splitType="Stretch">
+				<staticText>
+					<reportElement key="staticText" mode="Opaque" x="6" y="4" width="321" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="b18e781d-c73e-43f5-bc89-adc7d5249c89"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None">
+						<font size="12" isBold="true"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<text><![CDATA[Total de pontos da Equipe:]]></text>
+				</staticText>
+				<textField isBlankWhenNull="false">
+					<reportElement key="textField" mode="Opaque" x="331" y="4" width="195" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="9750e4d4-945b-47ca-8c6e-0f91f885cf97"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None">
+						<font size="12" isBold="true"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{total_pontos}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement key="line" mode="Opaque" x="6" y="2" width="519" height="1" forecolor="#000000" backcolor="#FFFFFF" uuid="310c52fe-cf77-4a85-be4c-09a9eef42b60"/>
+					<graphicElement fill="Solid">
+						<pen lineWidth="0.5" lineStyle="Solid"/>
+					</graphicElement>
+				</line>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="50" splitType="Stretch">
+			<staticText>
+				<reportElement key="staticText" mode="Opaque" x="4" y="10" width="523" height="32" forecolor="#000000" backcolor="#CCCCCC" uuid="939b21d5-b58f-4d03-adee-ece37ac4feab"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None">
+					<font size="18" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[PONTOS DO CAMPEONATO]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="36" splitType="Stretch">
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement key="textField" mode="Opaque" x="100" y="4" width="321" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="637b38f2-6e9f-4538-9183-e97429ba95a2"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None">
+					<font size="11"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{piloto_nome}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField" mode="Opaque" x="331" y="4" width="195" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="da098ebf-0e46-4366-82a1-80ab5a9b56b2"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None">
+					<font size="11"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{piloto_pontos}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="6" y="7" width="100" height="20" uuid="2950970b-b131-4af8-b6a3-896a01567ce0">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{piloto_numero}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="29" splitType="Stretch">
+			<rectangle radius="0">
+				<reportElement key="rectangle" mode="Opaque" x="7" y="7" width="520" height="20" forecolor="#FFFFFF" backcolor="#CCCCCC" uuid="60215ec7-4ee6-4f29-af8f-cbc60dbc0d3e"/>
+				<graphicElement fill="Solid">
+					<pen lineWidth="0.5" lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement key="textField" mode="Transparent" x="10" y="8" width="192" height="17" forecolor="#000000" backcolor="#FFFFFF" uuid="cc5ad701-b857-420f-a961-c7ee95362deb"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None">
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Página " + $V{PAGE_NUMBER} + " de "]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report" pattern="" isBlankWhenNull="false">
+				<reportElement key="textField" mode="Transparent" x="207" y="11" width="45" height="17" forecolor="#000000" backcolor="#FFFFFF" uuid="fe18ed6e-ee5a-4177-adf0-bbae6a75e1ca"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None">
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["" + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
